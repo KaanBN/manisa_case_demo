@@ -37,6 +37,7 @@ dependencies:
   go_router: ^14.8.0
   flutter_riverpod: ^2.6.1
   google_fonts: ^6.2.1
+  json_theme: ^7.0.0+3
 
 dev_dependencies:
   flutter_test:
@@ -90,3 +91,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  assets:
+    - assets/
+    - assets/json/

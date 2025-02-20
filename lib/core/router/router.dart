@@ -15,9 +15,18 @@ final router = GoRouter(
     ShellRoute(
       builder: (context, state, child) => MainScreen(child: child),
       routes: [
-        GoRoute(path: '/chats', builder: (context, state) => const ChatsScreen()),
-        GoRoute(path: '/profile', builder: (context, state) => const ProfileScreen()),
-        GoRoute(path: '/settings', builder: (context, state) => const SettingsScreen()),
+        GoRoute(
+            path: '/chats',
+            builder: (context, state) => ChatsScreen()
+        ),
+        GoRoute(
+            path: '/profile',
+            builder: (context, state) => ProfileScreen()
+        ),
+        GoRoute(
+            path: '/settings',
+            builder: (context, state) => SettingsScreen()
+        ),
       ],
     ),
     GoRoute(
