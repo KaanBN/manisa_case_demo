@@ -16,8 +16,8 @@ final getChatsUseCaseProvider = Provider<GetChatsUseCase> ((ref) {
   return GetChatsUseCase(repo);
 });
 
-@riverpod
-class ChatNotifier extends AsyncNotifier<List<Chat>> {
+@Riverpod(keepAlive: true)
+class ChatNotifier extends _$ChatNotifier {
   @override
   Future<List<Chat>> build() async {
     final getChatsUseCase = ref.read(getChatsUseCaseProvider);
