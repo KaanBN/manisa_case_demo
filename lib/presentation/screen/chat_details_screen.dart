@@ -61,51 +61,84 @@ class ChatDetailScreen extends ConsumerWidget {
             ],
           )
         ),
-        body: chatDetailState.when(
-          data: (messages) {
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: messages.length,
-                    itemBuilder: (context, index) {
-                      final message = messages[index];
-                      return ChatDetailListItem(message: message);
-                    },
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: chatDetailState.when(
+            data: (messages) {
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: messages.length,
+                      itemBuilder: (context, index) {
+                        final message = messages[index];
+                        return ChatDetailListItem(message: message);
+                      },
+                    ),
                   ),
-                ),
 
-                Padding(
-                  padding: EdgeInsets.fromLTRB(MediaQuery.of(context).padding.left + 10, 0, MediaQuery.of(context).padding.right + 10, MediaQuery.of(context).padding.bottom + 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          minLines: 1,
-                          maxLines: 10,
-                          keyboardType: TextInputType.multiline,
-                          decoration: InputDecoration(
-                            hintText: "Mesajınızı giriniz...",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(MediaQuery.of(context).padding.left + 10, 5, MediaQuery.of(context).padding.right + 10, MediaQuery.of(context).padding.bottom + 10),
+                    decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            width: 1,
+                            color: Colors.grey
+                          )
+                        )
+                    ),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color:Color(0xfff6f6f6)
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: TextField(
+                              minLines: 1,
+                              maxLines: 10,
+                              keyboardType: TextInputType.multiline,
+                              decoration: InputDecoration(
+                                hintText: "Mesajınızı giriniz...",
+                                border: InputBorder.none,
+                                hintStyle: TextStyle(
+                                  color: Theme.of(context).hintColor
+                                )
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.send, color: Theme.of(context).primaryColor),
-                        onPressed: () {
-                          print("send message");
-                        },
-                      ),
-                    ],
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color:Theme.of(context).colorScheme.primaryFixed,
+                          ),
+                          child: IconButton(
+                            icon: Icon(Icons.send_outlined, color: Theme.of(context).colorScheme.primary),
+                            onPressed: () {
+                              print("send message");
+                            },
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            );
-          },
-          error: (error, _) => Center(child: Text("Error: ${error.toString()}")),
-          loading: () => const Center(child: CircularProgressIndicator()),
+                ],
+              );
+            },
+            error: (error, _) => Center(child: Text("Error: ${error.toString()}")),
+            loading: () => const Center(child: CircularProgressIndicator()),
+          ),
         ),
       )
     );
