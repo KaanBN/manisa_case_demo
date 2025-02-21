@@ -15,4 +15,22 @@ class ChatDetailRepositoryImpl extends ChatDetailRepository {
     }
   }
 
+  @override
+  Future<Either<Exception, Message>> sendMessage(Message message) async {
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      bool success = await sendFakeMessage(message);
+
+      if (success){
+        return Right(message.copyWith(status: MessageStatus.sent));
+      }
+      else {
+        return Left(Exception("Failed to send message."));
+      }
+    }
+    catch (e) {
+      return Left(Exception("Unexpected error while sending message."));
+    }
+  }
+
 }
