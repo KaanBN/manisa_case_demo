@@ -38,7 +38,10 @@ class ChatsScreen extends ConsumerWidget {
               return ChatListItem(
                 chatItem: chat,
                 onTap: () {
-                  context.push('/chat_detail/$index');
+                  context.push(
+                      '/chat_detail/$index',
+                    extra: chat
+                  );
                 }
               );
             },

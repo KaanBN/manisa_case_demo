@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:manisa_case/domain/entities/chat.dart';
 import 'package:manisa_case/presentation/screen/chat_details_screen.dart';
 import 'package:manisa_case/presentation/screen/chats_screen.dart';
 import 'package:manisa_case/presentation/screen/main_screen.dart';
@@ -33,7 +34,8 @@ final router = GoRouter(
       path: '/chat_detail/:id',
       builder: (context, state) {
         final chatId = int.parse(state.pathParameters['id']!);
-        return ChatDetailScreen(chatId: chatId);
+        final chat = state.extra as Chat;
+        return ChatDetailScreen(chatId: chatId, userName: chat.name, userProfileUrl: chat.avatarUrl,);
       },
     ),
   ],
