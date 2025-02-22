@@ -60,24 +60,6 @@ class ChatListItem extends StatelessWidget {
         ),
       ),
     );
-
-
-
-    return ListTile(
-      title: Text(chatItem.name),
-      subtitle: Text(chatItem.lastMessage),
-      //leading: Image.network("${chatItem.avatarUrl}"),
-      leading: CircleAvatar(
-        radius: 30.0,
-        backgroundImage:
-        NetworkImage(chatItem.avatarUrl),
-        backgroundColor: Colors.transparent,
-      ),
-      trailing: Text(rewriteDateTime(chatItem.lastMessageTime)),
-      onTap: () {
-        context.push('/chat_detail/${chatItem.id}');
-      },
-    );
   }
 
   String rewriteDateTime(DateTime time) {
@@ -85,12 +67,12 @@ class ChatListItem extends StatelessWidget {
     final difference = now.difference(time);
 
     if(difference.inMinutes < 60){
-      return "${difference.inMinutes} min ago";
+      return "${difference.inMinutes} dk önce";
     } else if (difference.inHours < 24) {
       final f = DateFormat('hh:mm');
       return f.format(time);
     } else if (difference.inDays < 7) {
-      return "${difference.inDays} days ago";
+      return "${difference.inDays} gün önce";
     } else {
       final f = DateFormat('yyyy-MM-dd hh:mm');
       return f.format(time);

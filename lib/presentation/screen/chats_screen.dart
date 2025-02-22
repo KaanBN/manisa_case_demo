@@ -14,7 +14,7 @@ class ChatsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            "Chats",
+            "Mesajlar",
           style: TextStyle(
             color: Theme.of(context).primaryColor
           ),
