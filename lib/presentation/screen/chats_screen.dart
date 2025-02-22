@@ -27,28 +27,30 @@ class ChatsScreen extends ConsumerWidget {
           },
         child: Icon(Icons.add, size: 24,)
       ),
-      body: chatState.when(
-        data: (chats) => RefreshIndicator(
-          onRefresh: _pullRefresh,
-          child: ListView.separated(
-            itemCount: chats.length,
-            separatorBuilder: (context, index) => const Divider(),
-            itemBuilder: (context, index) {
-              final chat = chats[index];
-              return ChatListItem(
-                chatItem: chat,
-                onTap: () {
-                  context.push(
-                      '/chat_detail/$index',
-                    extra: chat
-                  );
-                }
-              );
-            },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: chatState.when(
+          data: (chats) => RefreshIndicator(
+            onRefresh: _pullRefresh,
+            child: ListView.builder(
+              itemCount: chats.length,
+              itemBuilder: (context, index) {
+                final chat = chats[index];
+                return ChatListItem(
+                  chatItem: chat,
+                  onTap: () {
+                    context.push(
+                        '/chat_detail/$index',
+                      extra: chat
+                    );
+                  }
+                );
+              },
+            ),
           ),
+          error: (error, _) => Center(child: Text("Error: ${error.toString()}")),
+          loading: () => const Center(child: CircularProgressIndicator()),
         ),
-        error: (error, _) => Center(child: Text("Error: ${error.toString()}")),
-        loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );
   }

@@ -35,9 +35,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool _hidePassword = true;
 
-  Future<void> _login() async {
+  Future<void> login() async {
     final authNotifier = ref.read(authProvider.notifier);
     await authNotifier.login(_usernameController.text, _passwordController.text);
+
+    final authState = ref.read(authProvider);
+    authState.whenData((user) {
+      if (user != null) {
+        context.go('/chats');
+      }
+    });
   }
 
   @override
@@ -123,13 +130,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(height: 24),
 
               authState.when(
-                data: (user) => LoginButton(context, _login),
+                data: (user) => LoginButton(context, login),
                 loading: () => const CircularProgressIndicator(),
                 error: (error, _) => Column(
                   children: [
                     Text(error.toString(), style: TextStyle(color: Theme.of(context).colorScheme.error)),
                     const SizedBox(height: 8),
-                    LoginButton(context, _login),
+                    LoginButton(context, login),
                   ],
                 ),
               ),

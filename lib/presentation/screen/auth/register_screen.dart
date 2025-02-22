@@ -32,12 +32,18 @@ class RegisterScreen extends ConsumerStatefulWidget {
 
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _hidePassword = true;
 
   Future<void> register() async {
     final authNotifier = ref.read(authProvider.notifier);
     await authNotifier.login(_usernameController.text, _passwordController.text);
+
+    final authState = ref.watch(authProvider);
+    authState.whenData((user) {
+      context.go("/chats");
+    });
   }
 
   @override

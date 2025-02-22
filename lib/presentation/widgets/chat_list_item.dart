@@ -13,50 +13,52 @@ class ChatListItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
         color: Colors.transparent,
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 30.0,
-              backgroundImage: NetworkImage(chatItem.avatarUrl),
-            ),
-            SizedBox(
-              width: 12,
-            ),
-            Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          chatItem.name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 30.0,
+                backgroundImage: NetworkImage(chatItem.avatarUrl),
+              ),
+              const SizedBox(
+                width: 12,
+              ),
+              Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            chatItem.name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                            rewriteDateTime(chatItem.lastMessageTime),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      chatItem.lastMessage,
-                      style: TextStyle(
-                          color: Color(0xff979797)
+                          Text(
+                              rewriteDateTime(chatItem.lastMessageTime),
+                          )
+                        ],
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-            )
-          ],
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        chatItem.lastMessage,
+                        style: TextStyle(
+                            color: Color(0xff979797)
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+              )
+            ],
+          ),
         ),
       ),
     );
