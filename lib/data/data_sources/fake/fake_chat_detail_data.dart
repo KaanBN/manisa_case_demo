@@ -24,3 +24,14 @@ final Map<int, List<Message>> fakeMessages = {
     Message(id: 14, chatId: 4, senderId: "4", text: "We should catch up soon.", timestamp: DateTime.now().subtract(const Duration(minutes: 17)), isMine: false),
   ],
 };
+
+Future<bool> sendFakeMessage(Message message) async {
+  try {
+    await Future.delayed(const Duration(seconds: 1));
+    fakeMessages[message.chatId]?.add(
+        message.updateStatus(status: MessageStatus.sent));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}

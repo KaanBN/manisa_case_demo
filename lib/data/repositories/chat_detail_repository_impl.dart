@@ -18,11 +18,12 @@ class ChatDetailRepositoryImpl extends ChatDetailRepository {
   @override
   Future<Either<Exception, Message>> sendMessage(Message message) async {
     try {
+      message.updateStatus(status: MessageStatus.sending);
       await Future.delayed(const Duration(seconds: 1));
       bool success = await sendFakeMessage(message);
 
       if (success){
-        return Right(message.copyWith(status: MessageStatus.sent));
+        return Right(message.updateStatus(status: MessageStatus.sent));
       }
       else {
         return Left(Exception("Failed to send message."));
