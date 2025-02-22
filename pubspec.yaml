@@ -43,6 +43,8 @@ dependencies:
   intl: ^0.20.2
   json_serializable: ^6.9.4
   json_annotation: ^4.9.0
+  shared_preferences: ^2.5.2
+  flutter_svg: ^2.0.17
 
 dev_dependencies:
 
@@ -104,3 +106,4 @@ flutter:
   assets:
     - assets/
     - assets/json/
+    - assets/images/

@@ -42,7 +42,7 @@
       "secondaryFixed": "#ffffdbce",
       "secondaryFixedDim": "#ffe7beaf",
       "shadow": "#ff000000",
-      "surface": "#fffff8f6",
+      "surface": "#ffffffff",
       "surfaceContainerLow": "#fffff1ec",
       "surfaceContainerLowest": "#ffffffff",
       "surfaceDim": "#ffe8d6d1",
@@ -135,7 +135,7 @@
     "secondaryFixed": "#ffffdbce",
     "secondaryFixedDim": "#ffe7beaf",
     "shadow": "#ff000000",
-    "surface": "#fffff8f6",
+    "surface": "#ffffffff",
     "surfaceContainerLow": "#fffff1ec",
     "surfaceContainerLowest": "#ffffffff",
     "surfaceDim": "#ffe8d6d1",
@@ -338,7 +338,7 @@
       "textBaseline": "alphabetic"
     }
   },
-  "scaffoldBackgroundColor": "#fffff8f6",
+  "scaffoldBackgroundColor": "#ffffffff",
   "secondaryHeaderColor": "#ffe3f2fd",
   "shadowColor": "#ff000000",
   "splashColor": "#66c8c8c8",

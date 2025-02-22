@@ -35,4 +35,9 @@ class FakeAuthDataSource {
       return Left(Exception("Register failed: ${e.toString()}"));
     }
   }
+
+  Future<void> logout() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return;
+  }
 }

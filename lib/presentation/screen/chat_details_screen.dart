@@ -131,27 +131,26 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                       onTap: () {
                         _messageInputFocusNode.requestFocus();
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color:Color(0xfff6f6f6)
-                        ),
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: TextField(
-                          minLines: 1,
-                          maxLines: 10,
-                          focusNode: _messageInputFocusNode,
-                          controller: _messageInputController,
-                          keyboardType: TextInputType.text,
-                          onSubmitted: (value) {handleSubmit();},
-                          decoration: InputDecoration(
-                              hintText: "Mesajınızı giriniz...",
-                              border: InputBorder.none,
-                              hintStyle: TextStyle(
-                                  color: Theme.of(context).hintColor
-                              )
+                      child: TextField(
+                        minLines: 1,
+                        maxLines: 10,
+                        focusNode: _messageInputFocusNode,
+                        controller: _messageInputController,
+                        keyboardType: TextInputType.text,
+                        onSubmitted: (value) {handleSubmit();},
+                        decoration: InputDecoration(
+                          hintText: "Mesajınızı giriniz...",
+                          hintStyle: TextStyle(
+                              color: Theme.of(context).hintColor
+                          ),
+                          filled: true,
+                          fillColor: Color(0xfff6f6f6),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none,
                           ),
                         ),
+
                       ),
                     ),
                   ),

@@ -24,3 +24,5 @@ final Map<int, List<Message>> fakeMessages = {
     Message(id: 14, chatId: 4, senderId: "4", text: "We should catch up soon.", timestamp: DateTime.now().subtract(const Duration(minutes: 17)), isMine: false),
   ],
 };
+
+final String userKey = 'current_user';
