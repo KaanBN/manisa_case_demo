@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:manisa_case/domain/entities/message.dart';
-import 'package:manisa_case/domain/repositories/chat_detail_repository.dart';
+import 'package:manisa_case/domain/repositories/chat_repository.dart';
 
 class GetChatDetailsUseCase {
-  final ChatDetailRepository chatDetailRepository;
+  final ChatRepository repository;
 
-  GetChatDetailsUseCase(this.chatDetailRepository);
+  GetChatDetailsUseCase(this.repository);
 
   Future<Either<Exception, List<Message>>> call(int chatId) {
-    return chatDetailRepository.getChatMessages(chatId);
+    return repository.getChatMessages(chatId);
   }
 }

@@ -1,4 +1,5 @@
-import 'package:manisa_case/data/repositories/chat_detail_repository_impl.dart';
+import 'package:manisa_case/data/data_sources/fake/fake_chat_data.dart';
+import 'package:manisa_case/data/repositories/chat_repositiry_impl.dart';
 import 'package:manisa_case/domain/entities/message.dart';
 import 'package:manisa_case/domain/use_cases/get_chat_detail_usecase.dart';
 import 'package:manisa_case/domain/use_cases/send_message_usecase.dart';
@@ -6,16 +7,21 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_messages_provider.g.dart';
 
-final chatDetailRepositoryProvider = Provider<ChatDetailRepositoryImpl>((ref) {
-  return ChatDetailRepositoryImpl();
+final chatDataSourceProvider = Provider<FakeChatDataSource>((ref) {
+  return FakeChatDataSource();
+});
+
+final chatRepositoryProvider = Provider<ChatRepositoryImpl>((ref) {
+  final datasource = ref.read(chatDataSourceProvider);
+  return ChatRepositoryImpl(datasource);
 });
 
 final getMessagesUseCaseProvider = Provider<GetChatDetailsUseCase>((ref) {
-  return GetChatDetailsUseCase(ref.read(chatDetailRepositoryProvider));
+  return GetChatDetailsUseCase(ref.read(chatRepositoryProvider));
 });
 
 final sendMessageUseCaseProvider = Provider<SendMessageUseCase>((ref) {
-  return SendMessageUseCase(ref.read(chatDetailRepositoryProvider));
+  return SendMessageUseCase(ref.read(chatRepositoryProvider));
 });
 
 @riverpod
@@ -67,7 +73,7 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
         state = AsyncValue.data([
           for (final message in state.value ?? [])
             if (message.id == newMessage.id)
-              sentMessage
+              message.updateStatus(status: MessageStatus.sent)
             else
               message
         ]);
