@@ -28,7 +28,7 @@ class ChatsScreen extends ConsumerWidget {
         child: Icon(Icons.add, size: 24,)
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: chatState.when(
           data: (chats) => RefreshIndicator(
             onRefresh: _pullRefresh,

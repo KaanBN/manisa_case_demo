@@ -36,7 +36,7 @@ class OnboardingScreen extends StatelessWidget {
             const Spacer(),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).primaryColor,

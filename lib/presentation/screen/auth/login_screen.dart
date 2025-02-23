@@ -16,7 +16,7 @@ Widget LoginButton(BuildContext context, VoidCallback onPressed){
         ),
         onPressed: onPressed,
         child: Text(
-          "Login",
+          "Giriş Yap",
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimary),
         ),
       )
@@ -101,6 +101,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               TextField(
                 controller: _passwordController,
                 obscureText: _hidePassword,
+                onSubmitted: (_){
+                  login();
+                },
                 decoration: InputDecoration(
                   hintText: "Şifre",
                   hintStyle: TextStyle(
