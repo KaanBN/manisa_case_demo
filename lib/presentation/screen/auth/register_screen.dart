@@ -169,13 +169,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                   TextButton(
                       onPressed: () {
-                        context.push('/register');
+                        context.pushReplacement('/login');
                       },
                       child: RichText(
                         text: TextSpan(
                             children: [
-                              TextSpan(text: 'Hesabınız Yok mu ? ', style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
-                              TextSpan(text: 'Kayıt Ol', style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
+                              TextSpan(text: 'Hesabınız var mı ? ', style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
+                              TextSpan(text: 'Giriş yap', style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
                             ]
                         ),
                       )

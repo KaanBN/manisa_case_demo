@@ -65,101 +65,106 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+        child: Center(
+          child: ScrollConfiguration(
+            behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
 
-              SvgPicture.asset(
-                "assets/images/unlock.svg",
-                width: 120,
-                height: 120,
-              ),
+                  SvgPicture.asset(
+                    "assets/images/unlock.svg",
+                    width: 120,
+                    height: 120,
+                  ),
 
-              const SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
-              TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  hintText: "Kullanıcı Adı",
-                  hintStyle: TextStyle(
-                      color: Theme.of(context).hintColor
-                  ),
-                  prefixIcon: Icon(Icons.person, color: Theme.of(context).primaryColor),
-                  filled: true,
-                  fillColor: Color(0xfff6f6f6),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              TextField(
-                controller: _passwordController,
-                obscureText: _hidePassword,
-                onSubmitted: (_){
-                  login();
-                },
-                decoration: InputDecoration(
-                  hintText: "Şifre",
-                  hintStyle: TextStyle(
-                      color: Theme.of(context).hintColor
-                  ),
-                  prefixIcon: Icon(Icons.lock, color: Theme.of(context).primaryColor),
-                  filled: true,
-                  fillColor: Color(0xfff6f6f6),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _hidePassword ? Icons.visibility : Icons.visibility_off,
-                      color: Theme.of(context).primaryColor,
+                  TextField(
+                    controller: _usernameController,
+                    decoration: InputDecoration(
+                      hintText: "Kullanıcı Adı",
+                      hintStyle: TextStyle(
+                          color: Theme.of(context).hintColor
+                      ),
+                      prefixIcon: Icon(Icons.person, color: Theme.of(context).primaryColor),
+                      filled: true,
+                      fillColor: Color(0xfff6f6f6),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _hidePassword = !_hidePassword;
-                      });
+                  ),
+                  const SizedBox(height: 16),
+
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: _hidePassword,
+                    onSubmitted: (_){
+                      login();
                     },
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 24),
-
-              authState.when(
-                data: (user) => LoginButton(context, login),
-                loading: () => const CircularProgressIndicator(),
-                error: (error, _) => Column(
-                  children: [
-                    Text(error.toString(), style: TextStyle(color: Theme.of(context).colorScheme.error)),
-                    const SizedBox(height: 8),
-                    LoginButton(context, login),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 24),
-
-              TextButton(
-                  onPressed: () {
-                    context.push('/register');
-                  },
-                  child: RichText(
-                    text: TextSpan(
-                        children: [
-                          TextSpan(text: 'Hesabınız Yok mu ? ', style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
-                          TextSpan(text: 'Kayıt Ol', style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
-                        ]
+                    decoration: InputDecoration(
+                      hintText: "Şifre",
+                      hintStyle: TextStyle(
+                          color: Theme.of(context).hintColor
+                      ),
+                      prefixIcon: Icon(Icons.lock, color: Theme.of(context).primaryColor),
+                      filled: true,
+                      fillColor: Color(0xfff6f6f6),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _hidePassword ? Icons.visibility : Icons.visibility_off,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                      ),
                     ),
-                  )
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  authState.when(
+                    data: (user) => LoginButton(context, login),
+                    loading: () => const CircularProgressIndicator(),
+                    error: (error, _) => Column(
+                      children: [
+                        Text(error.toString(), style: TextStyle(color: Theme.of(context).colorScheme.error)),
+                        const SizedBox(height: 8),
+                        LoginButton(context, login),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  TextButton(
+                      onPressed: () {
+                        context.pushReplacement('/register');
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                            children: [
+                              TextSpan(text: 'Hesabınız Yok mu ? ', style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
+                              TextSpan(text: 'Kayıt Ol', style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
+                            ]
+                        ),
+                      )
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

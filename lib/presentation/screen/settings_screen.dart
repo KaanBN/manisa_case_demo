@@ -21,9 +21,9 @@ class SettingsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              onPressed: (){
+              onPressed: () async {
                 final authNotifier = ref.read(authProvider.notifier);
-                authNotifier.logout();
+                await authNotifier.logout();
                 final authState = ref.read(authProvider);
                 authState.whenData((user){
                   if(user == null){

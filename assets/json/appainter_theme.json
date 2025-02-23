@@ -152,7 +152,7 @@
   "hintColor": "#99000000",
   "hoverColor": "#0a000000",
   "iconTheme": {
-    "color": "#dd000000"
+    "color": "#ff000000"
   },
   "indicatorColor": "#ffffffff",
   "inputDecorationTheme": {
@@ -169,7 +169,7 @@
   "primaryColorDark": "#ff1976d2",
   "primaryColorLight": "#ffbbdefb",
   "primaryIconTheme": {
-    "color": "#ffffffff"
+    "color": "#ff000000"
   },
   "primaryTextTheme": {
     "bodyLarge": {
