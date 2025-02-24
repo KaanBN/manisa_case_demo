@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:manisa_case/domain/entities/user.dart';
+import 'package:manisa_case/data/models/login_response.dart';
+import 'package:manisa_case/data/models/register_response.dart';
 
 abstract class AuthRepository {
-  Future<Either<Exception, User>> login(String username, String password);
-  Future<Either<Exception, User>> register(String username, String email, String password);
+  Future<Either<Exception, LoginResponseModel>> login(String username, String password);
+  Future<Either<Exception, RegisterResponseModel>> register(String username, String email, String password);
   Future<void> logout();
 }

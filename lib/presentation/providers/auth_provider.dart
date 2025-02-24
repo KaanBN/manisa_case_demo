@@ -2,17 +2,24 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manisa_case/core/constants/constants.dart';
-import 'package:manisa_case/data/data_sources/fake/fake_auth_data.dart';
+import 'package:manisa_case/core/network/api_client.dart';
+import 'package:manisa_case/data/data_sources/remote/remote_auth_data.dart';
+import 'package:manisa_case/data/models/user_model.dart';
 import 'package:manisa_case/data/repositories/auth_repository_impl.dart';
 import 'package:manisa_case/domain/entities/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final fakeAuthDataSourceProvider = Provider<FakeAuthDataSource>((ref) {
-  return FakeAuthDataSource();
+final apiClientProvider = Provider<ApiClient>((ref) {
+  return ApiClient();
+});
+
+final authDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
+  final apiClient = ref.read(apiClientProvider);
+  return AuthRemoteDataSource(apiClient);
 });
 
 final authRepositoryProvider = Provider<AuthRepositoryImpl>((ref) {
-  final dataSource = ref.read(fakeAuthDataSourceProvider);
+  final dataSource = ref.read(authDataSourceProvider);
   return AuthRepositoryImpl(dataSource);
 });
 
@@ -33,7 +40,7 @@ class AuthNotifier extends AsyncNotifier<User?> {
     final prefs = await SharedPreferences.getInstance();
     final userJson = prefs.getString(userKey);
     if (userJson == null) return null;
-    return User.fromJson(jsonDecode(userJson));
+    return UserModel.fromJson(json.decode(userJson)).toEntity();
   }
 
   Future<void> login(String email, String password) async {
@@ -41,7 +48,7 @@ class AuthNotifier extends AsyncNotifier<User?> {
     final result = await authRepository.login(email, password);
     state = result.fold(
           (error) => AsyncValue.error(error, StackTrace.current),
-          (user) => AsyncValue.data(user),
+          (loginResponse) => AsyncValue.data(loginResponse.user.toEntity()),
     );
   }
 
@@ -50,7 +57,7 @@ class AuthNotifier extends AsyncNotifier<User?> {
     final result = await authRepository.register(username ,email, password);
     state = result.fold(
           (error) => AsyncValue.error(error, StackTrace.current),
-          (user) => AsyncValue.data(user),
+          (registerResponse) => AsyncValue.data(registerResponse.user.toEntity()),
     );
   }
 

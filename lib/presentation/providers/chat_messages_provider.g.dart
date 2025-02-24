@@ -7,7 +7,7 @@ part of 'chat_messages_provider.dart';
 // **************************************************************************
 
 String _$chatMessagesNotifierHash() =>
-    r'afaf66b45849818f00573b947e7062c8d1a5bf72';
+    r'd8a537d3c787c933e51ae76580c4fb85d88b2dfe';
 
 /// See also [ChatMessagesNotifier].
 @ProviderFor(ChatMessagesNotifier)

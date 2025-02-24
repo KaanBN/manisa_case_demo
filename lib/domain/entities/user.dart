@@ -1,25 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:manisa_case/domain/entities/profile_image.dart';
 
-part 'user.g.dart';
-
-@JsonSerializable()
 class User {
   final int id;
-  final String name;
+  final String username;
   final String email;
-  @JsonKey(name: 'profile_image_url')
-  final String profileImageUrl;
-  final String token;
+  final ProfileImage profileImage;
 
   User({
     required this.id,
-    required this.name,
+    required this.username,
     required this.email,
-    required this.profileImageUrl,
-    required this.token,
+    required this.profileImage,
   });
-
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

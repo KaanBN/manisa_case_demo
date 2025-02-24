@@ -24,7 +24,7 @@ class ProfileScreen extends ConsumerWidget {
               ),
               child: CircleAvatar(
                 radius: 60,
-                backgroundImage: NetworkImage(user.profileImageUrl),
+                backgroundImage: NetworkImage(user.profileImage.imageUrl),
               ),
             ),
 
@@ -40,7 +40,7 @@ class ProfileScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  user.name,
+                  user.username,
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 const SizedBox(width: 8),

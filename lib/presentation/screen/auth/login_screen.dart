@@ -31,13 +31,13 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _hidePassword = true;
 
   Future<void> login() async {
     final authNotifier = ref.read(authProvider.notifier);
-    await authNotifier.login(_usernameController.text, _passwordController.text);
+    await authNotifier.login(_emailController.text, _passwordController.text);
 
     final authState = ref.read(authProvider);
     authState.whenData((user) {
@@ -84,13 +84,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 40),
 
                   TextField(
-                    controller: _usernameController,
+                    controller: _emailController,
                     decoration: InputDecoration(
-                      hintText: "Kullanıcı Adı",
+                      hintText: "Email",
                       hintStyle: TextStyle(
                           color: Theme.of(context).hintColor
                       ),
-                      prefixIcon: Icon(Icons.person, color: Theme.of(context).primaryColor),
+                      prefixIcon: Icon(Icons.alternate_email, color: Theme.of(context).primaryColor),
                       filled: true,
                       fillColor: Color(0xfff6f6f6),
                       border: OutlineInputBorder(

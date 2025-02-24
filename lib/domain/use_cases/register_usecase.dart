@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:manisa_case/domain/entities/user.dart';
+import 'package:manisa_case/data/models/register_response.dart';
 import 'package:manisa_case/domain/repositories/auth_repository.dart';
 
 class RegisterUseCase {
@@ -7,7 +7,7 @@ class RegisterUseCase {
 
   RegisterUseCase(this.repository);
 
-  Future<Either<Exception, User>> call(String username, String email, String password){
+  Future<Either<Exception, RegisterResponseModel>> call(String username, String email, String password){
     return repository.register(username, email, password);
   }
 }
