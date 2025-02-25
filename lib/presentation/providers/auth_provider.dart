@@ -37,10 +37,10 @@ class AuthNotifier extends AsyncNotifier<User?> {
   Future<User?> build() async {
     authRepository = ref.read(authRepositoryProvider);
     webSocketService = ref.read(websocketProvider);
-    return _loadUser();
+    return loadUser();
   }
 
-  Future<User?> _loadUser() async {
+  Future<User?> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
     final userJson = prefs.getString(userKey);
     if (userJson == null) return null;

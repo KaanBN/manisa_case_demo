@@ -4,16 +4,17 @@ import 'package:manisa_case/domain/entities/message.dart';
 
 class ChatDetailListItem extends StatelessWidget {
   final Message message;
+  final bool isMine;
 
   const ChatDetailListItem({
     super.key,
     required this.message,
+    required this.isMine
   });
 
   @override
   Widget build(BuildContext context) {
     final timeString = DateFormat('HH:mm').format(message.createdAt);
-    final isMine = message.isMine;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -37,14 +38,14 @@ class ChatDetailListItem extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               margin: const EdgeInsets.symmetric(vertical: 4),
               decoration: BoxDecoration(
-                color: isMine ? _decideColor(context) : Theme.of(context).colorScheme.onPrimary,
+                color: isMine ? _decideColor(context) : Theme.of(context).colorScheme.surfaceBright,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    message.text,
+                    message.message,
                     style: TextStyle(
                       color: isMine ? Colors.white : Colors.black,
                     ),

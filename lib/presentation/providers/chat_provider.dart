@@ -31,9 +31,16 @@ final getChatsUseCaseProvider = Provider<GetChatsUseCase> ((ref) {
 
 @Riverpod(keepAlive: true)
 class ChatNotifier extends _$ChatNotifier {
+  late StreamSubscription _subscription;
+
   @override
   Future<List<Chat>> build() async {
     final getChatsUseCase = ref.read(getChatsUseCaseProvider);
+
+    ref.onDispose(() {
+      _subscription.cancel();
+    });
+
     final result = await getChatsUseCase();
     return result.fold(
           (error) => throw error,

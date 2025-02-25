@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:manisa_case/presentation/providers/auth_provider.dart';
 import '../providers/chat_messages_provider.dart';
 import '../widgets/chat_detail_list_item.dart';
 
@@ -47,6 +48,8 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final chatState = ref.watch(chatMessagesNotifierProvider);
+    final authState = ref.watch(authProvider);
+    final currentUserId = authState.value!.id;
 
     return Scaffold(
       appBar: AppBar(
@@ -96,13 +99,14 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
           children: [
             Expanded(
               child: chatState.when(
-                data: (messages) => ListView.builder(
+                data: (messageList) => ListView.builder(
                   reverse: true,
-                  itemCount: messages.length,
+                  itemCount: messageList.messages.length,
                   itemBuilder: (context, index) {
-                    final message = messages[messages.length - 1 - index];
+                    final message = messageList.messages[messageList.messages.length - 1 - index];
                     return ChatDetailListItem(
-                      message: message,
+                      message: message.toEntity(),
+                      isMine: message.senderId == currentUserId,
                     );
                   },
                 ),
