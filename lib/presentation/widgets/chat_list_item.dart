@@ -20,7 +20,7 @@ class ChatListItem extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 30.0,
-                backgroundImage: NetworkImage(chatItem.avatarUrl),
+                backgroundImage: NetworkImage(chatItem.otherUser.profileImage.imageUrl),
               ),
               const SizedBox(
                 width: 12,
@@ -33,27 +33,29 @@ class ChatListItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            chatItem.name,
+                            chatItem.otherUser.username,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                              rewriteDateTime(chatItem.lastMessageTime),
-                          )
+                          if (chatItem.lastMessage != null)
+                            Text(
+                              rewriteDateTime(chatItem.lastMessage!.createdAt),
+                            ),
                         ],
                       ),
                       const SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        chatItem.lastMessage,
-                        style: TextStyle(
-                            color: Color(0xff979797)
+                      if (chatItem.lastMessage != null)
+                        Text(
+                          chatItem.lastMessage!.message,
+                          style: TextStyle(
+                              color: Color(0xff979797)
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
                     ],
                   ),
               )

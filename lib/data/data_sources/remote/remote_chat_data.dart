@@ -16,7 +16,11 @@ class RemoteChatDataSource {
       );
 
       final List<dynamic> data = response.data;
-      final chats = data.map((json) => ChatModel.fromJson(json)).toList();
+      final chats = data.map((json) {
+        print("remote_chat_data => json: $json ");
+        return ChatModel.fromJson(json);
+      }).toList();
+      //print("remote_chat_data => chats: $chats");
       return Right(chats);
     } catch (e) {
       return Left(Exception("Mesajlar alınamadı: ${e.toString()}"));

@@ -5,16 +5,16 @@ part 'profile_image_model.g.dart';
 
 @JsonSerializable()
 class ProfileImageModel {
-  final int id;
+  final int? id;
   @JsonKey(name: "imageUrl")
   final String imageUrl;
   @JsonKey(name: "userId")
-  final int userId;
+  final int? userId;
 
   ProfileImageModel({
-    required this.id,
+    this.id,
     required this.imageUrl,
-    required this.userId,
+    this.userId,
   });
 
   factory ProfileImageModel.fromJson(Map<String, dynamic> json) => _$ProfileImageModelFromJson(json);
@@ -22,9 +22,9 @@ class ProfileImageModel {
 
   ProfileImage toEntity(){
     return ProfileImage(
-        id: id,
+        id: id ?? 0,
         imageUrl: imageUrl,
-        userId: userId
+        userId: userId ?? 0
     );
   }
 }

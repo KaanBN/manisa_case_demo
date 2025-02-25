@@ -11,7 +11,7 @@ class ChatModel {
   @JsonKey(name: "otherUser")
   final UserModel otherUser;
   @JsonKey(name: "lastMessage")
-  final MessageModel lastMessage;
+  final MessageModel? lastMessage;
 
   ChatModel({required this.id, required this.otherUser, required this.lastMessage});
 
@@ -22,6 +22,6 @@ class ChatModel {
   Chat toEntity() => Chat(
       id: id,
       otherUser: otherUser.toEntity(),
-      lastMessage: lastMessage.toEntity()
+      lastMessage: lastMessage?.toEntity()
   );
 }

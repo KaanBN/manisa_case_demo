@@ -8,9 +8,9 @@ part of 'profile_image_model.dart';
 
 ProfileImageModel _$ProfileImageModelFromJson(Map<String, dynamic> json) =>
     ProfileImageModel(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       imageUrl: json['imageUrl'] as String,
-      userId: (json['userId'] as num).toInt(),
+      userId: (json['userId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ProfileImageModelToJson(ProfileImageModel instance) =>

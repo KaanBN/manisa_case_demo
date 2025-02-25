@@ -34,7 +34,9 @@ class ChatsScreen extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: chatState.when(
           data: (chats) => RefreshIndicator(
-            onRefresh: _pullRefresh,
+            onRefresh: () async => {
+              _pullRefresh(ref)
+            },
             child: ListView.builder(
               itemCount: chats.length,
               itemBuilder: (context, index) {
@@ -51,14 +53,28 @@ class ChatsScreen extends ConsumerWidget {
               },
             ),
           ),
-          error: (error, _) => Center(child: Text("Error: ${error.toString()}")),
+          error: (error, _) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("Error: ${error.toString()}"),
+              ElevatedButton.icon(
+                onPressed: () {
+                  _pullRefresh(ref);
+                },
+                icon: const Icon(Icons.refresh),
+                label: const Text("Tekrar Dene"),
+              ),
+
+            ],
+          ),
           loading: () => const Center(child: CircularProgressIndicator()),
         ),
       ),
     );
   }
 
-  Future<void> _pullRefresh() async {
-    print("denem");
+  void _pullRefresh(WidgetRef ref) {
+    ref.invalidate(chatNotifierProvider);
   }
 }
