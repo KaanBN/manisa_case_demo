@@ -11,4 +11,12 @@ class Chat {
     required this.otherUser,
     this.lastMessage
   });
+
+  Chat updateLastMessage(Message newMessage){
+    return Chat(
+        id: id,
+        otherUser: otherUser,
+        lastMessage: Message(id: newMessage.id, message: newMessage.message, createdAt: newMessage.createdAt, senderId: newMessage.senderId)
+    );
+  }
 }

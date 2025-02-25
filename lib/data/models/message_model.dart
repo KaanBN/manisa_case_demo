@@ -13,12 +13,18 @@ class MessageModel {
   final DateTime createdAt;
   @JsonKey(name: "senderId")
   final int senderId;
+  @JsonKey(name: "conversationId")
+  final int? conversationId;
+  @JsonKey(name: "localId")
+  final int? localId;
 
   MessageModel({
     required this.id,
     required this.message,
     required this.createdAt,
     required this.senderId,
+    this.conversationId,
+    this.localId,
   });
 
   factory MessageModel.fromJson(Map<String, dynamic> json) => _$MessageModelFromJson(json);
@@ -29,6 +35,8 @@ class MessageModel {
     id: id,
     message: message,
     createdAt: createdAt,
-    senderId: senderId
+    senderId: senderId,
+    conversationId: conversationId,
+    localId: localId
   );
 }

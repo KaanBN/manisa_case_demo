@@ -55,7 +55,7 @@ final router = GoRouter(
       path: '/chat_detail/:id',
       builder: (context, state) {
         final chat = state.extra as Chat;
-        return ChatDetailScreen(chatId: chat.id, userName: chat.otherUser.username, userProfileUrl: chat.otherUser.profileImage.imageUrl,);
+        return ChatDetailScreen(chatId: chat.id, userName: chat.otherUser.username, userProfileUrl: chat.otherUser.profileImage.imageUrl, userId: chat.otherUser.id,);
       },
     ),
   ],

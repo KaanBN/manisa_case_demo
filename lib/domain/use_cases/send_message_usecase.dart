@@ -7,7 +7,7 @@ class SendMessageUseCase {
 
   SendMessageUseCase(this.repository);
 
-  Future<Either<Exception, Message>> call(Message message){
-    return repository.sendMessage(message);
+  void call(int recipientId, String content, int localId){
+    return repository.sendMessage(recipientId, content, localId);
   }
 }

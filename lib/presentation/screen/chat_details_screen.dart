@@ -8,12 +8,14 @@ class ChatDetailScreen extends ConsumerStatefulWidget {
   final int chatId;
   final String userName;
   final String userProfileUrl;
+  final int userId;
 
   const ChatDetailScreen({
     super.key,
     required this.chatId,
     required this.userName,
     required this.userProfileUrl,
+    required this.userId,
   });
 
   @override
@@ -33,7 +35,8 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
   void handleSubmit() {
     print(_messageInputController.text);
     if (_messageInputController.text.isNotEmpty) {
-      ref.read(chatMessagesNotifierProvider.notifier).sendMessage(_messageInputController.text);
+
+      ref.read(chatMessagesNotifierProvider.notifier).sendMessage(widget.userId, _messageInputController.text);
       _messageInputController.clear();
     }
   }
@@ -105,7 +108,7 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                   itemBuilder: (context, index) {
                     final message = messageList.messages[messageList.messages.length - 1 - index];
                     return ChatDetailListItem(
-                      message: message.toEntity(),
+                      message: message,
                       isMine: message.senderId == currentUserId,
                     );
                   },

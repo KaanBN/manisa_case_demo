@@ -24,8 +24,7 @@ class ChatDetailModel {
 
   ChatDetail toEntity() => ChatDetail(
     id: id,
-    otherUsername: otherUser.username,
-    otherUserProfileImage: otherUser.profileImage.imageUrl,
-    messages: messages.map((msg) => msg.toEntity()).toList(),
+    otherUser: otherUser.toEntity(),
+    messages: messages.map((msg) => msg.toEntity()).toList()
   );
 }

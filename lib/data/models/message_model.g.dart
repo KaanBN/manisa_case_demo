@@ -11,6 +11,8 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
       message: json['message'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       senderId: (json['senderId'] as num).toInt(),
+      conversationId: (json['conversationId'] as num?)?.toInt(),
+      localId: (json['localId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
@@ -19,4 +21,6 @@ Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
       'message': instance.message,
       'createdAt': instance.createdAt.toIso8601String(),
       'senderId': instance.senderId,
+      'conversationId': instance.conversationId,
+      'localId': instance.localId,
     };

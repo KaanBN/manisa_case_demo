@@ -6,6 +6,8 @@ class Message {
   final DateTime createdAt;
   final int senderId;
   final MessageStatus status;
+  final int? conversationId;
+  final int? localId;
 
   Message({
     required this.id,
@@ -13,6 +15,8 @@ class Message {
     required this.createdAt,
     required this.senderId,
     this.status = MessageStatus.sent,
+    this.conversationId,
+    this.localId,
   });
 
   Message updateStatus({MessageStatus? status}) {
@@ -22,6 +26,8 @@ class Message {
       message: message,
       createdAt: createdAt,
       status: status ?? this.status,
+      conversationId: conversationId,
+
     );
   }
 }

@@ -21,8 +21,8 @@ class ChatRepositoryImpl extends ChatRepository {
   }
 
   @override
-  Future<Either<Exception, Message>> sendMessage(Message message) async {
-    return dataSource.sendFakeMessage(message);
+  void sendMessage(int recipientId, String content, int localId) async {
+    return dataSource.sendMessage(recipientId, content, localId);
   }
 
 }

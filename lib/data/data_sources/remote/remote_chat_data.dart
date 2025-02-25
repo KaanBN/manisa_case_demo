@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:manisa_case/core/network/api_client.dart';
+import 'package:manisa_case/data/data_sources/websocket/websocket_service.dart';
 import 'package:manisa_case/data/models/chat_model.dart';
 import 'package:manisa_case/data/models/responses/chat_detail_response.dart';
-import 'package:manisa_case/domain/entities/message.dart';
 
 class RemoteChatDataSource {
   final ApiClient apiClient;
+  final WebSocketService webSocketService;
 
-  RemoteChatDataSource({required this.apiClient});
+  RemoteChatDataSource({required this.apiClient, required this.webSocketService});
 
   Future<Either<Exception, List<ChatModel>>> fetchChats() async {
     try {
@@ -39,14 +40,7 @@ class RemoteChatDataSource {
     }
   }
 
-  Future<Either<Exception, Message>> sendFakeMessage(Message message) async {
-    try {
-      message.updateStatus(status: MessageStatus.sending);
-      await Future.delayed(const Duration(seconds: 1));
-      return Right(message);
-    }
-    catch (e) {
-      return Left(Exception("Unexpected error while sending message."));
-    }
+  void sendMessage(int recipientId, String content, int localId) async {
+    webSocketService.sendMessage(recipientId, content, localId);
   }
 }

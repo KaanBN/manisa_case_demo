@@ -7,12 +7,12 @@ part of 'chat_messages_provider.dart';
 // **************************************************************************
 
 String _$chatMessagesNotifierHash() =>
-    r'6abd935fc4f38fc78a4499bcf87d6bd8e3f2030c';
+    r'840db39f169899640bca12899ed595c2844ca123';
 
 /// See also [ChatMessagesNotifier].
 @ProviderFor(ChatMessagesNotifier)
-final chatMessagesNotifierProvider = AutoDisposeAsyncNotifierProvider<
-    ChatMessagesNotifier, ChatDetailModel>.internal(
+final chatMessagesNotifierProvider =
+    AutoDisposeAsyncNotifierProvider<ChatMessagesNotifier, ChatDetail>.internal(
   ChatMessagesNotifier.new,
   name: r'chatMessagesNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final chatMessagesNotifierProvider = AutoDisposeAsyncNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$ChatMessagesNotifier = AutoDisposeAsyncNotifier<ChatDetailModel>;
+typedef _$ChatMessagesNotifier = AutoDisposeAsyncNotifier<ChatDetail>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
