@@ -1,15 +1,14 @@
+import 'package:manisa_case/domain/entities/message.dart';
+import 'package:manisa_case/domain/entities/user.dart';
+
 class Chat {
   final int id;
-  final String name;
-  final String lastMessage;
-  final String avatarUrl;
-  final DateTime lastMessageTime;
+  final User otherUser;
+  final Message lastMessage;
 
   Chat({
     required this.id,
-    required this.name,
-    required this.lastMessage,
-    required this.avatarUrl,
-    required this.lastMessageTime,
+    required this.otherUser,
+    required this.lastMessage
   });
 }

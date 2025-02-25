@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:manisa_case/data/models/login_response.dart';
+import 'package:manisa_case/data/models/responses/login_response.dart';
 import 'package:manisa_case/domain/repositories/auth_repository.dart';
 
 class LoginUseCase {

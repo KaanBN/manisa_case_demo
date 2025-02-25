@@ -1,4 +1,6 @@
-import 'package:manisa_case/data/data_sources/fake/fake_chat_data.dart';
+import 'package:manisa_case/core/network/api_client.dart';
+import 'package:manisa_case/data/data_sources/remote/remote_chat_data.dart';
+import 'package:manisa_case/data/models/responses/chat_detail_response.dart';
 import 'package:manisa_case/data/repositories/chat_repositiry_impl.dart';
 import 'package:manisa_case/domain/entities/message.dart';
 import 'package:manisa_case/domain/use_cases/get_chat_detail_usecase.dart';
@@ -7,9 +9,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_messages_provider.g.dart';
 
-final chatDataSourceProvider = Provider<FakeChatDataSource>((ref) {
-  return FakeChatDataSource();
+final apiClientProvider = Provider<ApiClient>((ref) {
+  return ApiClient();
 });
+
+final chatDataSourceProvider = Provider<RemoteChatDataSource>((ref) {
+  final apiClient = ref.read(apiClientProvider);
+  return RemoteChatDataSource(apiClient: apiClient);
+});
+
 
 final chatRepositoryProvider = Provider<ChatRepositoryImpl>((ref) {
   final datasource = ref.read(chatDataSourceProvider);
@@ -34,13 +42,12 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
   }
 
   @override
-  Future<List<Message>> build() async {
-    if (chatId == 0) return [];
+  Future<ChatDetailModel> build() async {
     final getMessagesUseCase = ref.read(getMessagesUseCaseProvider);
     final result = await getMessagesUseCase(chatId);
     return result.fold(
           (error) => throw error,
-          (messages) => messages,
+          (chatDetail) => chatDetail,
     );
   }
 
@@ -48,12 +55,10 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
     final sendMessageUseCase = ref.read(sendMessageUseCaseProvider);
     final newMessage = Message(
       id: DateTime.now().millisecondsSinceEpoch,
-      chatId: chatId,
-      senderId: "me",
-      text: text,
-      timestamp: DateTime.now(),
-      isMine: true,
+      senderId: 1,
       status: MessageStatus.sending,
+      message: 'deneme',
+      createdAt: DateTime.now(),
     );
 
     state = AsyncValue.data([...state.value ?? [], newMessage]);

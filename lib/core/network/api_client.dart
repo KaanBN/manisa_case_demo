@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:manisa_case/core/constants/constants.dart';
 
 class ApiClient{
   final Dio dio;
@@ -7,7 +8,7 @@ class ApiClient{
 
   ApiClient()
       : dio = Dio(BaseOptions(
-    baseUrl: "http://192.168.1.116:8001/api",
+    baseUrl: BASE_URL,
     connectTimeout: const Duration(seconds: 10),
     receiveTimeout: const Duration(seconds: 15),
     headers: {

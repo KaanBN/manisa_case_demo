@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:manisa_case/presentation/providers/chat_provider.dart';
+import 'package:manisa_case/presentation/providers/websocket_provider.dart';
 import 'package:manisa_case/presentation/widgets/chat_list_item.dart';
 
-import '../providers/chat_provider.dart';
 
 class ChatsScreen extends ConsumerWidget {
   const ChatsScreen({super.key});
@@ -11,6 +12,8 @@ class ChatsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chatState = ref.watch(chatNotifierProvider);
+    final websocketService = ref.read(websocketProvider);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(

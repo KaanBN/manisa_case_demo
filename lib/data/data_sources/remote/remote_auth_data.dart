@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:manisa_case/core/network/api_client.dart';
-import 'package:manisa_case/data/models/login_response.dart';
-import 'package:manisa_case/data/models/register_response.dart';
+import 'package:manisa_case/data/models/responses/login_response.dart';
+import 'package:manisa_case/data/models/responses/register_response.dart';
 
 class AuthRemoteDataSource {
   final ApiClient apiClient;

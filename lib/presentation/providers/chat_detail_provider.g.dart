@@ -7,7 +7,7 @@ part of 'chat_detail_provider.dart';
 // **************************************************************************
 
 String _$chatDetailNotifierHash() =>
-    r'815e36a5d027547b31d000753680e95ced7964e0';
+    r'6da9d4eef2e494ea5b29d95858dceed87bebcd2a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 }
 
 abstract class _$ChatDetailNotifier
-    extends BuildlessAutoDisposeAsyncNotifier<List<Message>> {
+    extends BuildlessAutoDisposeAsyncNotifier<ChatDetail> {
   late final int chatId;
 
-  FutureOr<List<Message>> build(
+  FutureOr<ChatDetail> build(
     int chatId,
   );
 }
@@ -44,7 +44,7 @@ abstract class _$ChatDetailNotifier
 const chatDetailNotifierProvider = ChatDetailNotifierFamily();
 
 /// See also [ChatDetailNotifier].
-class ChatDetailNotifierFamily extends Family<AsyncValue<List<Message>>> {
+class ChatDetailNotifierFamily extends Family<AsyncValue<ChatDetail>> {
   /// See also [ChatDetailNotifier].
   const ChatDetailNotifierFamily();
 
@@ -83,7 +83,7 @@ class ChatDetailNotifierFamily extends Family<AsyncValue<List<Message>>> {
 
 /// See also [ChatDetailNotifier].
 class ChatDetailNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    ChatDetailNotifier, List<Message>> {
+    ChatDetailNotifier, ChatDetail> {
   /// See also [ChatDetailNotifier].
   ChatDetailNotifierProvider(
     int chatId,
@@ -114,7 +114,7 @@ class ChatDetailNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
   final int chatId;
 
   @override
-  FutureOr<List<Message>> runNotifierBuild(
+  FutureOr<ChatDetail> runNotifierBuild(
     covariant ChatDetailNotifier notifier,
   ) {
     return notifier.build(
@@ -139,7 +139,7 @@ class ChatDetailNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<ChatDetailNotifier, List<Message>>
+  AutoDisposeAsyncNotifierProviderElement<ChatDetailNotifier, ChatDetail>
       createElement() {
     return _ChatDetailNotifierProviderElement(this);
   }
@@ -160,15 +160,14 @@ class ChatDetailNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ChatDetailNotifierRef
-    on AutoDisposeAsyncNotifierProviderRef<List<Message>> {
+mixin ChatDetailNotifierRef on AutoDisposeAsyncNotifierProviderRef<ChatDetail> {
   /// The parameter `chatId` of this provider.
   int get chatId;
 }
 
 class _ChatDetailNotifierProviderElement
     extends AutoDisposeAsyncNotifierProviderElement<ChatDetailNotifier,
-        List<Message>> with ChatDetailNotifierRef {
+        ChatDetail> with ChatDetailNotifierRef {
   _ChatDetailNotifierProviderElement(super.provider);
 
   @override

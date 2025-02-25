@@ -2,31 +2,25 @@ enum MessageStatus { sending, sent, failed }
 
 class Message {
   final int id;
-  final int chatId;
-  final String senderId;
-  final String text;
-  final DateTime timestamp;
-  final bool isMine;
+  final String message;
+  final DateTime createdAt;
+  final int senderId;
   final MessageStatus status;
 
   Message({
     required this.id,
-    required this.chatId,
+    required this.message,
+    required this.createdAt,
     required this.senderId,
-    required this.text,
-    required this.timestamp,
-    required this.isMine,
     this.status = MessageStatus.sent,
   });
 
   Message updateStatus({MessageStatus? status}) {
     return Message(
       id: id,
-      chatId: chatId,
       senderId: senderId,
-      text: text,
-      timestamp: timestamp,
-      isMine: isMine,
+      message: message,
+      createdAt: createdAt,
       status: status ?? this.status,
     );
   }

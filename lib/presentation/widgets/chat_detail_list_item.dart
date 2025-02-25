@@ -12,7 +12,7 @@ class ChatDetailListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final timeString = DateFormat('HH:mm').format(message.timestamp);
+    final timeString = DateFormat('HH:mm').format(message.createdAt);
     final isMine = message.isMine;
 
     return Padding(
