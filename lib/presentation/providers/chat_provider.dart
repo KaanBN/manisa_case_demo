@@ -10,8 +10,6 @@ import 'package:manisa_case/domain/use_cases/get_chats_usecase.dart';
 import 'package:manisa_case/presentation/providers/websocket_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'chat_detail_provider.dart';
-
 part 'chat_provider.g.dart';
 
 final apiClientProvider = Provider<ApiClient>((ref) {

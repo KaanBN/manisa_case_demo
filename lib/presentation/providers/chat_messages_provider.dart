@@ -46,23 +46,34 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
   int chatId = -1;
   late StreamSubscription _subscription;
 
-  void setChatId(int id) {
-    chatId = id;
-    ref.invalidateSelf();
-  }
-
   @override
   Future<ChatDetail> build() async {
     final webSocketService = ref.read(websocketProvider);
 
     if (chatId == -1) {
-      return ChatDetail(id: 0, otherUser: User(id: 0, username: "asd", email: "asd", profileImage: ProfileImage(id: 0, imageUrl: "asd", userId: 0)), messages: []);
+      return ChatDetail(
+        id: 0,
+        otherUser: User(
+          id: 0,
+          username: "asd",
+          email: "asd",
+          profileImage: ProfileImage(id: 0, imageUrl: "asd", userId: 0),
+        ),
+        messages: [],
+      );
     }
 
     _subscription = webSocketService.messageStream.listen((data) {
       if (data['type'] == 'message-sent') {
         _handleMessageSent(data['message']);
       }
+      else if (data['type'] == 'message'){
+        _handleIncomingMessage(data['message']);
+      }
+    });
+
+    ref.onDispose(() {
+      _subscription.cancel();
     });
 
     final getMessagesUseCase = ref.read(getMessagesUseCaseProvider);
@@ -73,8 +84,12 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
     );
   }
 
+  void setChatId(int id) {
+    chatId = id;
+    ref.invalidateSelf();
+  }
+
   void _handleMessageSent(Map<String, dynamic> messageData) {
-    print("messageData: $messageData");
     final message = MessageModel.fromJson(messageData);
     final currentState = state;
 
@@ -86,9 +101,22 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
         return msg;
       }).toList();
 
-
       state = AsyncValue.data(currentState.value.updateMessages(updatedMessages) );
     }
+  }
+
+  void _handleIncomingMessage(Map<String, dynamic> messageData) {
+    final message = MessageModel.fromJson(messageData);
+    final messageEntity = message.toEntity();
+    final currentState = state;
+
+    state.whenData((chatDetail){
+      final updatedMessages = List.of(chatDetail.messages)..add(messageEntity);
+
+      if (currentState is AsyncData<ChatDetail>) {
+        state = AsyncValue.data(currentState.value.updateMessages(updatedMessages));
+      }
+    });
   }
 
   Future<void> sendMessage(int recipientId, String content) async {
