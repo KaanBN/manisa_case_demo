@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class OnboardingScreen extends StatelessWidget {
+  const OnboardingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,4 @@
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manisa_case/core/network/api_client.dart';
 import 'package:manisa_case/data/data_sources/remote/remote_user_data.dart';
 import 'package:manisa_case/data/repositories/user_repository_impl.dart';

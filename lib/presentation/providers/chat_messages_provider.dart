@@ -2,14 +2,10 @@ import 'dart:async';
 
 import 'package:manisa_case/core/network/api_client.dart';
 import 'package:manisa_case/data/data_sources/remote/remote_chat_data.dart';
-import 'package:manisa_case/data/data_sources/websocket/websocket_service.dart';
 import 'package:manisa_case/data/models/message_model.dart';
-import 'package:manisa_case/data/models/responses/chat_detail_response.dart';
 import 'package:manisa_case/data/repositories/chat_repositiry_impl.dart';
 import 'package:manisa_case/domain/entities/chat_detail.dart';
 import 'package:manisa_case/domain/entities/message.dart';
-import 'package:manisa_case/domain/entities/profile_image.dart';
-import 'package:manisa_case/domain/entities/user.dart';
 import 'package:manisa_case/domain/use_cases/get_chat_detail_usecase.dart';
 import 'package:manisa_case/domain/use_cases/send_message_usecase.dart';
 import 'package:manisa_case/presentation/providers/auth_provider.dart';
