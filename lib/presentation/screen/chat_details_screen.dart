@@ -58,7 +58,7 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
         bottom: PreferredSize(
             preferredSize: const Size.fromHeight(2.0),
             child: Container(
-              color: Color(0xffebebeb),
+              color: Theme.of(context).colorScheme.surfaceDim,
               height: 4.0,
             )),
         title: Row(
@@ -150,7 +150,7 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                               color: Theme.of(context).hintColor
                           ),
                           filled: true,
-                          fillColor: Color(0xfff6f6f6),
+                          fillColor: Theme.of(context).colorScheme.surface,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide.none,

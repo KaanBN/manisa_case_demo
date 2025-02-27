@@ -38,7 +38,7 @@ class ChatDetailListItem extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               margin: const EdgeInsets.symmetric(vertical: 4),
               decoration: BoxDecoration(
-                color: isMine ? _decideColor(context) : Theme.of(context).colorScheme.surfaceBright,
+                color: isMine ? _decideColor(context) : Theme.of(context).colorScheme.surfaceDim,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -47,7 +47,7 @@ class ChatDetailListItem extends StatelessWidget {
                   Text(
                     message.message,
                     style: TextStyle(
-                      color: isMine ? Colors.white : Colors.black,
+                      color: isMine ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ],
@@ -75,7 +75,7 @@ class ChatDetailListItem extends StatelessWidget {
       case MessageStatus.sending:
         return Color(0xff333333);
       case MessageStatus.sent:
-        return Theme.of(context).primaryColor;
+        return Theme.of(context).colorScheme.primary;
       case MessageStatus.failed:
         return Theme.of(context).colorScheme.error;
     }

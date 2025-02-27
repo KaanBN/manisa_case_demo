@@ -42,14 +42,7 @@ class ProfileScreen extends ConsumerWidget {
                 Text(
                   user.username,
                   style: Theme.of(context).textTheme.labelLarge,
-                ),
-                const SizedBox(width: 8),
-                /*IconButton(
-                  icon: const Icon(Icons.edit, color: Colors.orange),
-                  onPressed: () {
-                    _showEditNameDialog(context, ref, user.name);
-                  },
-                ),*/
+                )
               ],
             ),
           ],

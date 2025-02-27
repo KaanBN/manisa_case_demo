@@ -6,6 +6,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:json_theme/json_theme.dart';
 import 'package:manisa_case/core/router/router.dart';
 
+Future<Map<String, ThemeData>> combineThemes() async {
+  final lightThemeStr = await rootBundle.loadString('assets/json/appainter_theme.json');
+  final darkThemeStr = await rootBundle.loadString('assets/json/appainter_theme_dark.json');
+
+  final lightThemeJson = json.decode(lightThemeStr);
+  final darkThemeJson = json.decode(darkThemeStr);
+
+  final lightTheme = ThemeDecoder.decodeThemeData(lightThemeJson)!;
+  final darkTheme = ThemeDecoder.decodeThemeData(darkThemeJson)!;
+
+  return {'light': lightTheme, 'dark': darkTheme};
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -18,24 +31,32 @@ Future<void> main() async {
     ),
   );
 
-  final themeStr = await rootBundle.loadString('assets/json/appainter_theme.json');
-  final themeJson = jsonDecode(themeStr);
-  final theme = ThemeDecoder.decodeThemeData(themeJson)!;
+  final combinedTheme = await combineThemes();
 
-  runApp(ProviderScope(child: MyApp(theme: theme)));
+  runApp(ProviderScope(child: MyApp(
+    lightTheme: combinedTheme['light']!,
+    darkTheme: combinedTheme['dark']!,
+  )));
 }
 
 class MyApp extends StatelessWidget {
-  final ThemeData theme;
+  final ThemeData lightTheme;
+  final ThemeData darkTheme;
 
-  const MyApp({super.key, required this.theme});
+  const MyApp({
+    super.key,
+    required this.lightTheme,
+    required this.darkTheme
+  });
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,
-      theme: theme,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
     );
   }
 }
