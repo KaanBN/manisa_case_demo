@@ -33,7 +33,6 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
   }
 
   void handleSubmit() {
-    print(_messageInputController.text);
     if (_messageInputController.text.isNotEmpty) {
 
       ref.read(chatMessagesNotifierProvider.notifier).sendMessage(widget.userId, _messageInputController.text);

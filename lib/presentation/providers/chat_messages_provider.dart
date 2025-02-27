@@ -50,19 +50,6 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
   Future<ChatDetail> build() async {
     final webSocketService = ref.read(websocketProvider);
 
-    if (chatId == -1) {
-      return ChatDetail(
-        id: 0,
-        otherUser: User(
-          id: 0,
-          username: "asd",
-          email: "asd",
-          profileImage: ProfileImage(id: 0, imageUrl: "asd", userId: 0),
-        ),
-        messages: [],
-      );
-    }
-
     _subscription = webSocketService.messageStream.listen((data) {
       if (data['type'] == 'message-sent') {
         _handleMessageSent(data['message']);
@@ -89,10 +76,33 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
     ref.invalidateSelf();
   }
 
-  void _handleMessageSent(Map<String, dynamic> messageData) {
+  /*void _handleMessageSent(Map<String, dynamic> messageData) {
     final message = MessageModel.fromJson(messageData);
     final currentState = state;
 
+    print("currentState: ${currentState}");
+
+    if (currentState is AsyncData<ChatDetail>) {
+      final updatedMessages = currentState.value.messages.map((msg) {
+        print("msg.id: ${msg.id} message.id: ${message.id} \n\nmsg.localId: ${msg.localId} message.localId: ${message.localId}");
+        if (msg.id == message.localId) {
+          return msg.updateStatus(status: MessageStatus.sent);
+        }
+        return msg;
+      }).toList();
+
+      state = AsyncValue.data(currentState.value.updateMessages(updatedMessages) );
+    }
+  }*/
+
+  void _handleMessageSent(Map<String, dynamic> messageData) {
+    final message = MessageModel.fromJson(messageData);
+
+    if (chatId == -1 && message.conversationId != null) {
+      setChatId(message.conversationId!);
+    }
+
+    final currentState = state;
     if (currentState is AsyncData<ChatDetail>) {
       final updatedMessages = currentState.value.messages.map((msg) {
         if (msg.id == message.localId) {
@@ -101,7 +111,7 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
         return msg;
       }).toList();
 
-      state = AsyncValue.data(currentState.value.updateMessages(updatedMessages) );
+      state = AsyncValue.data(currentState.value.updateMessages(updatedMessages));
     }
   }
 
@@ -140,6 +150,6 @@ class ChatMessagesNotifier extends _$ChatMessagesNotifier {
       );
     }
 
-    sendMessageUseCase.call(chatId, content, localId);
+    sendMessageUseCase.call(recipientId, content, localId);
   }
 }
